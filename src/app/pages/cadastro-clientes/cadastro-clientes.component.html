@@ -1,0 +1,45 @@
+<h1>Cadastro de Clientes</h1>
+
+<!-- Formulário de cadastro de cliente -->
+<form (submit)="cadastrarCliente()">
+  <!-- Campos do formulário -->
+  <div>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" [(ngModel)]="cliente.nome" required>
+  </div>
+
+  <div>
+    <label for="cpfCnpj">CPF/CNPJ:</label>
+    <input type="text" id="cpfCnpj" [(ngModel)]="cliente.cpfCnpj" mask="000.000.000-009" [validation]="true" required>
+  </div>
+
+  <div>
+    <label for="rgIe">RG/IE:</label>
+    <input type="text" id="rgIe" [(ngModel)]="cliente.rgIe" required>
+  </div>
+
+  <div>
+    <label for="dataCadastro">Data de Cadastro:</label>
+    <input type="date" id="dataCadastro" [(ngModel)]="cliente.dataCadastro" required>
+  </div>
+
+  <div>
+    <label for="ativo">Ativo:</label>
+    <input type="checkbox" id="ativo" [(ngModel)]="cliente.ativo">
+  </div>
+
+<!--  <div>-->
+<!--    <label for="telefones">Telefones:</label>-->
+<!--    <button (click)="adicionarTelefone()">Adicionar Telefone</button>-->
+<!--    <ul>-->
+<!--      <li *ngFor="let telefone of cliente.telefones; let i = index">-->
+<!--        <input type="text" [(ngModel)]="telefone.ddd" required>-->
+<!--        <input type="text" [(ngModel)]="telefone.numero" required>-->
+<!--        <button (click)="removerTelefone(i)">Remover</button>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+
+  <!-- Botão de submit -->
+  <button type="submit">Cadastrar</button>
+</form>

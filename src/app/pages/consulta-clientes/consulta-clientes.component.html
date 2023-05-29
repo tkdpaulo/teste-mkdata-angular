@@ -1,0 +1,55 @@
+<h1>Consulta de Clientes</h1>
+
+<!-- Filtro -->
+<div>
+  <label for="filtroNome">Nome:</label>
+  <input type="text" id="filtroNome" [(ngModel)]="filtroNome" placeholder="Digite o nome">
+</div>
+
+<div>
+  <label for="filtroAtivo">Ativos:</label>
+  <input type="checkbox" id="filtroAtivo" [(ngModel)]="filtroAtivo">
+</div>
+
+<div>
+  <button (click)="filtrarClientes()">Filtrar</button>
+</div>
+
+<!-- Tabela de Clientes -->
+<table>
+  <thead>
+  <tr>
+    <th>Nome</th>
+    <th>Tipo</th>
+    <th>CPF/CNPJ</th>
+    <th>RG/IE</th>
+    <th>Data de Cadastro</th>
+    <th>Ativo</th>
+    <th>Telefones</th>
+    <th>Opções</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cliente of clientes | filtroClientes:filtroNome:(!!filtroAtivo ? filtroAtivo : false)">
+    <td>{{ cliente.nome }}</td>
+    <td>{{ cliente.tipo }}</td>
+    <td>{{ cliente.cpfCnpj }}</td>
+    <td>{{ cliente.rgIe }}</td>
+    <td>{{ cliente.dataCadastro | date }}</td>
+    <td>{{ cliente.ativo ? 'Sim' : 'Não' }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let telefone of cliente.telefones">
+          {{ telefone.ddd }} {{ telefone.numero }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <button (click)="editarCliente(cliente.id)">Editar</button>
+      <button (click)="excluirCliente(cliente.id)">Excluir</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<button (click)="novoCliente()">Novo Cliente</button>

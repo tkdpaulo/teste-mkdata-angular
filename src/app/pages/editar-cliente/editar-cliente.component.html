@@ -1,0 +1,50 @@
+<h1>Editar Cliente</h1>
+
+<!-- Formulário de edição de cliente -->
+<form (ngSubmit)="atualizarCliente()">
+  <div>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" [(ngModel)]="cliente.nome" name="nome" required>
+  </div>
+
+  <div>
+    <label for="cpfCnpj">CPF/CNPJ:</label>
+    <input type="text" id="cpfCnpj" [(ngModel)]="cliente.cpfCnpj" name="cpfCnpj" required>
+  </div>
+
+  <div>
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" [(ngModel)]="cliente.tipo" name="tipo" required>
+      <option value="Físico">Físico</option>
+      <option value="Jurídico">Jurídico</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="rgIe">RG/IE:</label>
+    <input type="text" id="rgIe" [(ngModel)]="cliente.rgIe" name="rgIe">
+  </div>
+
+  <div>
+    <label for="dataCadastro">Data de Cadastro:</label>
+    <input type="date" id="dataCadastro" [(ngModel)]="cliente.dataCadastro" name="dataCadastro" required>
+  </div>
+
+  <div>
+    <label for="ativo">Ativo:</label>
+    <input type="checkbox" id="ativo" [(ngModel)]="cliente.ativo" name="ativo">
+  </div>
+
+  <div>
+    <label for="telefones">Telefones:</label>
+    <ul>
+      <li *ngFor="let telefone of cliente.telefones">
+        {{ telefone.ddd }} {{ telefone.numero }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Outros campos do cliente, se houver -->
+
+  <button type="submit">Atualizar</button>
+</form>
