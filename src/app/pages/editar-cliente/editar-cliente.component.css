@@ -80,6 +80,17 @@
   display: flex;
   justify-content: flex-end;
 }
+.btn-voltar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #575757;
+  color: #fff;
+  cursor: pointer;
+  text-align: left;
+  margin-right: 20px;
+}
 
 .btn-salvar {
   padding: 10px 20px;

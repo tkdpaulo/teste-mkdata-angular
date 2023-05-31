@@ -65,8 +65,12 @@ export class EditarClienteComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
+    console.log("onSubmit->this.form: ", this.form);
+    console.log("onSubmit->this.form.valid: ", this.form.valid);
+    console.log("onSubmit->this.form.value: ", this.form.value);
+    // if (this.form.valid) {
       const cliente: Cliente = this.form.value;
+
       this.apiService.updateClient(cliente).subscribe(
         (updatedClient) => {
           console.log('Cliente atualizado com sucesso:', updatedClient);
@@ -75,9 +79,9 @@ export class EditarClienteComponent implements OnInit {
           console.error('Erro ao atualizar o cliente:', error);
         }
       );
-    } else {
-      console.error('Formulário inválido');
-    }
+    // } else {
+    //   console.error('Formulário inválido');
+    // }
   }
   voltar(){
     this.router.navigate(['/consultar-clientes']);
@@ -92,105 +96,3 @@ export class EditarClienteComponent implements OnInit {
     return tipo && tipo.value === 'PJ';
   }
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-// import { ApiService } from '../../services/api.service';
-// import { Cliente } from "../../model/cliente.model";
-//
-// @Component({
-//   selector: 'app-editar-cliente',
-//   templateUrl: './editar-cliente.component.html',
-//   styleUrls: ['./editar-cliente.component.css']
-// })
-// export class EditarClienteComponent implements OnInit {
-//   form: FormGroup = this.formBuilder.group({
-//     nome: ['', Validators.required],
-//     tipo: ['', Validators.required],
-//     cpfCnpj: ['', Validators.required],
-//     rgIe: [''],
-//     dataCadastro: [new Date()],
-//     ativo: [true],
-//     telefones: this.formBuilder.array([])
-//   });
-//   cliente?: Cliente;
-//
-//   constructor(
-//     private route: ActivatedRoute,
-//     private router: Router,
-//     private formBuilder: FormBuilder,
-//     private apiService: ApiService
-//   ) { }
-//
-//   ngOnInit(): void {
-//     const id = this.route.snapshot.paramMap.get('id');
-//     this.apiService.findById(id).subscribe(
-//       (cliente) => {
-//         this.cliente = cliente;
-//         console.log("ngOnInit->Cliente: ", this.cliente);
-//         this.initForm();
-//       },
-//       (error) => {
-//         console.error(`Erro ao carregar o cliente com ID ${id}:`, error);
-//         // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
-//       }
-//     );
-//   }
-//
-//   initForm(): void {
-//     this.form = this.formBuilder.group({
-//       nome: [this.cliente?.nome, Validators.required],
-//       tipo: ['', Validators.required],
-//       cpfCnpj: [this.cliente?.cpfCnpj, Validators.required],
-//       rgIe: [this.cliente?.rgIe, Validators.required],
-//       ativo: [this.cliente?.ativo],
-//       telefones: this.formBuilder.array([])
-//     });
-//   }
-//
-//   voltar(){
-//     this.router.navigate(['/consultar-clientes']);
-//   }
-//   onSubmit(): void {
-//     const clienteAtualizado = {
-//       ...this.cliente,
-//       ...this.form.value
-//     };
-//
-//     this.apiService.updateClient(clienteAtualizado).subscribe(
-//       () => {
-//         this.router.navigate(['/consultar-clientes']);
-//       },
-//       (error) => {
-//         console.error(`Erro ao atualizar o cliente com ID ${this.cliente?.id}:`, error);
-//         // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
-//       }
-//     );
-//   }
-//
-//   get telefones(): FormArray {
-//     return this.form.get('telefones') as FormArray;
-//   }
-//
-//   addTelefone(): void {
-//     this.telefones.push(this.formBuilder.group({
-//       ddd: [''],
-//       numero: ['']
-//     }));
-//   }
-//
-//   removeTelefone(index: number): void {
-//     this.telefones.removeAt(index);
-//   }
-//
-//   isCpf() {
-//     const tipo = this.form.get('tipo');
-//     return tipo && tipo.value === 'PF';
-//   }
-//
-//   isCnpj() {
-//     const tipo = this.form.get('tipo');
-//     return tipo && tipo.value === 'PJ';
-//   }
-// }
