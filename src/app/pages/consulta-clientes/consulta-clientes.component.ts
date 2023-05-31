@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService } from "../../core/cliente.service";
+import { ApiService } from "../../services/api.service";
 import { Cliente } from "../../model/cliente.model";
-import { Router } from '@angular/router';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-consulta-clientes',
@@ -10,64 +10,75 @@ import { Router } from '@angular/router';
 })
 export class ConsultaClientesComponent implements OnInit {
   clientes: Cliente[] = [];
-  clientesFiltrados: Cliente[] = [];
-  filtroNome: string = '';
-  filtroAtivo: boolean | null = null;
+  filtroNome = '';
+  filtroAtivo = '';
+  clienteSelecionado: any;
+  clientesOriginal: any;
+  exibirConfirmacaoExclusao: boolean = false;
 
-  constructor(private clienteService: ClienteService,private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.obterClientes();
+    this.apiService.findAll().subscribe((clientes: any[]) => {
+      this.clientes = clientes;
+      this.clientesOriginal = clientes.slice(); // faz uma cópia da lista original
+    });
+    this.loadClientes();
   }
 
-  obterClientes(): void {
-    this.clienteService.obterClientes().subscribe(
-      (clientes: Cliente[]) => {
+  loadClientes(): void {
+    this.apiService.findAll().subscribe(
+      (clientes) => {
         this.clientes = clientes;
-        this.filtrarClientes(); // Atualize os clientes filtrados ao carregar os clientes
       },
-      (error: any) => {
-        console.error(error);
+      (error) => {
+        console.error('Erro ao carregar clientes:', error);
+        // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
       }
     );
   }
 
-  filtrarClientes() {
-    // Lógica de filtragem
-    this.clientesFiltrados = this.clientes.filter((cliente) => {
-      // Verifica se o nome do cliente contém o filtro de nome (ignorando maiúsculas e minúsculas)
-      const nomeMatch = cliente.nome.toLowerCase().includes(this.filtroNome.toLowerCase());
-
-      // Verifica se o cliente está ativo, se o filtro de ativos for true,
-      // ou se o filtro de ativos for false e o cliente não estiver ativo
-      const ativoMatch = this.filtroAtivo === null || cliente.ativo === this.filtroAtivo;
-
-      // Retorna true se tanto o nome quanto o status ativo do cliente corresponderem aos filtros aplicados
-      return nomeMatch && ativoMatch;
+  filtrar(): void {
+    this.clientes = this.clientesOriginal.filter((cliente: any) => {
+      const nome = cliente.nome ? cliente.nome.toLowerCase() : '';
+      const filtroNome = this.filtroNome ? this.filtroNome.toLowerCase() : '';
+      const filtroAtivo = this.filtroAtivo !== '' ? this.filtroAtivo === 'true' : null;
+      return nome.includes(filtroNome) && (filtroAtivo === null || cliente.ativo === filtroAtivo);
     });
   }
 
-  editarCliente(id: number): void {
-    // Redirecionar para a página de edição do cliente com o ID fornecido
-    this.router.navigate(['/editar-cliente', id]);
+  selecionar(cliente: any) {
+    this.clienteSelecionado = cliente;
+  }
+  novoCliente() {
+    // Implementação do método para criar um novo cliente
   }
 
-  excluirCliente(id: number): void {
-    // Chamar o método do serviço ClienteService para excluir o cliente
-    this.clienteService.excluirCliente(id).subscribe(
-      () => {
-        // Atualizar a lista de clientes após a exclusão bem-sucedida
-        this.obterClientes();
-      },
-      (error: any) => {
-        console.error(error);
-        // Lidar com o erro de exclusão do cliente
-      }
-    );
+  confirmarExclusao() {
+    // Implementação do método para confirmar a exclusão do cliente selecionado
+    this.exibirConfirmacaoExclusao = false;
   }
 
-  novoCliente(): void {
-    // Redirecionar para a página de criação de cliente
-    this.router.navigate(['/cadastro-clientes']);
+  cancelarExclusao() {
+    this.clienteSelecionado = null;
+    this.exibirConfirmacaoExclusao = false;
   }
+
+  editarCliente(id: number | undefined): void {
+    this.router.navigate(['/clientes', id, 'editar']);
+  }
+  excluir(cliente: Cliente): void {
+    if (confirm(`Deseja excluir o cliente "${cliente.nome}"?`)) {
+      this.apiService.deleteClient(cliente.id).subscribe(
+        () => {
+          this.clientes = this.clientes.filter((c) => c.id !== cliente.id);
+        },
+        (error) => {
+          console.error(`Erro ao excluir o cliente "${cliente.nome}":`, error);
+          // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
+        }
+      );
+    }
+  }
+
 }

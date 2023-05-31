@@ -1,0 +1,97 @@
+.cadastro-clientes {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cadastro-clientes h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="checkbox"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+  margin-top: 5px;
+}
+
+.form-group input[type="text"][formControlName="numero"] {
+  width: 120px;
+  font-size: 16px;
+}
+
+.telefone {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.telefone label {
+  margin-right: 10px;
+}
+
+.telefone input[type="text"] {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.btn-remover-telefone {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #dc3545;
+: #fff;
+  cursor: pointer;
+}
+
+.btn-adicionar-telefone {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-salvar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-salvar:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

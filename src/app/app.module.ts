@@ -3,28 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConsultaClientesComponent } from './pages/consulta-clientes/consulta-clientes.component';
 import { CadastroClientesComponent } from './pages/cadastro-clientes/cadastro-clientes.component';
+import { ConsultaClientesComponent } from './pages/consulta-clientes/consulta-clientes.component';
 import { EditarClienteComponent } from './pages/editar-cliente/editar-cliente.component';
-import { FormsModule } from "@angular/forms";
-import { FiltroClientesPipe } from './pipes/filtro-clientes.pipe';
-import {NgxMaskDirective} from "ngx-mask";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgxMaskModule} from 'ngx-mask';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConsultaClientesComponent,
     CadastroClientesComponent,
-    EditarClienteComponent,
-    FiltroClientesPipe
+    ConsultaClientesComponent,
+    EditarClienteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxMaskDirective
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

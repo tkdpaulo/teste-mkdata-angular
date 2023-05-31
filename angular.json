@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/teste-mkdata-angular",
-            "index": "src/app/pages/cadastro-clientes/cadastro-clientes.component.html",
+            "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []

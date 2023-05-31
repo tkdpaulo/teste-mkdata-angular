@@ -1,55 +1,50 @@
-<h1>Consulta de Clientes</h1>
+<header>
+  <h1>Consulta de Clientes</h1>
+</header>
 
-<!-- Filtro -->
-<div>
-  <label for="filtroNome">Nome:</label>
-  <input type="text" id="filtroNome" [(ngModel)]="filtroNome" placeholder="Digite o nome">
-</div>
+<main>
 
-<div>
-  <label for="filtroAtivo">Ativos:</label>
-  <input type="checkbox" id="filtroAtivo" [(ngModel)]="filtroAtivo">
-</div>
+  <div class="input-group">
+    <label for="filtro-nome">Nome:</label>
+    <input type="text" id="filtro-nome" [(ngModel)]="filtroNome" class="form-control">
 
-<div>
-  <button (click)="filtrarClientes()">Filtrar</button>
-</div>
+    <label for="filtro-ativo">Ativo:</label>
+    <select id="filtro-ativo" [(ngModel)]="filtroAtivo" class="form-control">
+      <option value="">Todos</option>
+      <option value="true">Sim</option>
+      <option value="false">Não</option>
+    </select>
 
-<!-- Tabela de Clientes -->
-<table>
-  <thead>
-  <tr>
-    <th>Nome</th>
-    <th>Tipo</th>
-    <th>CPF/CNPJ</th>
-    <th>RG/IE</th>
-    <th>Data de Cadastro</th>
-    <th>Ativo</th>
-    <th>Telefones</th>
-    <th>Opções</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let cliente of clientes | filtroClientes:filtroNome:(!!filtroAtivo ? filtroAtivo : false)">
-    <td>{{ cliente.nome }}</td>
-    <td>{{ cliente.tipo }}</td>
-    <td>{{ cliente.cpfCnpj }}</td>
-    <td>{{ cliente.rgIe }}</td>
-    <td>{{ cliente.dataCadastro | date }}</td>
-    <td>{{ cliente.ativo ? 'Sim' : 'Não' }}</td>
-    <td>
-      <ul>
-        <li *ngFor="let telefone of cliente.telefones">
-          {{ telefone.ddd }} {{ telefone.numero }}
-        </li>
-      </ul>
-    </td>
-    <td>
-      <button (click)="editarCliente(cliente.id)">Editar</button>
-      <button (click)="excluirCliente(cliente.id)">Excluir</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+    <button type="button" (click)="filtrar()" class="btn btn-primary">Filtrar</button>
+  </div>
 
-<button (click)="novoCliente()">Novo Cliente</button>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF/CNPJ</th>
+      <th>Ativo</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cliente of clientes" (click)="selecionar(cliente)" [class.table-active]="clienteSelecionado === cliente">
+      <td>{{ cliente.nome ? cliente.nome : '' }}</td>
+      <td>{{ cliente.cpfCnpj }}</td>
+      <td>{{ cliente.ativo ? 'Sim' : 'Não' }}</td>
+      <td>
+        <button type="button" (click)="editarCliente(cliente.id)" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+        <button type="button" (click)="excluir(cliente)" class="btn btn-danger"><i class="fas fa-trash"></i> Excluir</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-danger" role="alert" *ngIf="exibirConfirmacaoExclusao">
+    Tem certeza que deseja excluir o cliente "{{ clienteSelecionado?.nome }}"?
+    <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Sim</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelarExclusao()">Não</button>
+  </div>
+
+</main>

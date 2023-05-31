@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+:root {
+  --primary-color: #007bff; /* azul */
+  --secondary-color: #6c757d; /* cinza */
+  --light-color: #f8f9fa; /* cinza claro */
+  --dark-color: #343a40; /* cinza escuro */
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #0069d9; /* azul escuro */
+  border-color: #0062cc; /* azul escuro */
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* cinza escuro */
+  border-color: #545b62; /* cinza escuro */
+}
+
+.submit-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  /*background-color: var(--primary-color);*/
+  color: black;
+}
+
+main {
+  padding: 1rem;
+}
+
+.table tbody tr:hover {
+  background-color: var(--light-color);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--light-color);
+}
+
+.btn {
+  margin-right: 0.5rem;
+}
+
+.alert {
+  margin-top: 1rem;
+}
