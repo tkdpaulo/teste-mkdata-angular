@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Cliente } from "../../model/cliente.model";
-import { Telefone } from "../../model/telefone.model";
 import { ApiService } from "../../services/api.service";
 import {Router} from "@angular/router";
 
@@ -49,17 +48,14 @@ export class CadastroClientesComponent implements OnInit {
       this.apiService.createClient(cliente).subscribe(
         (createdClient) => {
           console.log('Cliente criado com sucesso:', createdClient);
-          // Implemente a lógica para lidar com o cliente criado, como redirecionar para a tela de consulta
         },
         (error) => {
           console.error('Erro ao criar o cliente:', error);
-          // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
         }
       );
       this.router.navigate(['/consultar-clientes']);
     } else {
       console.error('Formulário inválido');
-      // Implemente a lógica para lidar com formulários inválidos, como exibir uma mensagem de erro
     }
 
   }

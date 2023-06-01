@@ -3,22 +3,17 @@
 </header>
 
 <main>
-
   <div class="input-group">
     <label for="filtro-nome">Nome:</label>
     <input type="text" id="filtro-nome" [(ngModel)]="filtroNome" class="form-control">
-
     <label for="filtro-ativo">Ativo:</label>
     <select id="filtro-ativo" [(ngModel)]="filtroAtivo" class="form-control">
       <option value="">Todos</option>
       <option value="true">Sim</option>
       <option value="false">Não</option>
     </select>
-
     <button type="button" (click)="filtrar()" class="btn btn-primary">Filtrar</button>
   </div>
-
-
   <table class="table table-striped">
     <thead>
     <tr>
@@ -40,7 +35,6 @@
     </tr>
     </tbody>
   </table>
-
   <div class="alert alert-danger" role="alert" *ngIf="exibirConfirmacaoExclusao">
     Tem certeza que deseja excluir o cliente "{{ clienteSelecionado?.nome }}"?
     <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">Sim</button>

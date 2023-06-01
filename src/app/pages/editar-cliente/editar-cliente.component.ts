@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class EditarClienteComponent implements OnInit {
   form: FormGroup;
-  id: number = 0; // Adicione esta linha
+  id: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +20,7 @@ export class EditarClienteComponent implements OnInit {
     private apiService: ApiService,
     private fb: FormBuilder) {
     this.form = this.fb.group({
-      id: [null, Validators.required], // Adicione esta linha
+      id: [null, Validators.required],
       nome: ['', Validators.required],
       tipo: ['', Validators.required],
       cpfCnpj: ['', Validators.required],
@@ -38,7 +38,6 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-  // Adicione este método
   loadClient(): void {
     this.apiService.findById(this.id).subscribe(client => {
       this.form.patchValue(client);
@@ -68,20 +67,15 @@ export class EditarClienteComponent implements OnInit {
     console.log("onSubmit->this.form: ", this.form);
     console.log("onSubmit->this.form.valid: ", this.form.valid);
     console.log("onSubmit->this.form.value: ", this.form.value);
-    // if (this.form.valid) {
-      const cliente: Cliente = this.form.value;
-
-      this.apiService.updateClient(cliente).subscribe(
-        (updatedClient) => {
-          console.log('Cliente atualizado com sucesso:', updatedClient);
-        },
-        (error) => {
-          console.error('Erro ao atualizar o cliente:', error);
-        }
-      );
-    // } else {
-    //   console.error('Formulário inválido');
-    // }
+    const cliente: Cliente = this.form.value;
+    this.apiService.updateClient(cliente).subscribe(
+      (updatedClient) => {
+        console.log('Cliente atualizado com sucesso:', updatedClient);
+      },
+      (error) => {
+        console.error('Erro ao atualizar o cliente:', error);
+      }
+    );
   }
   voltar(){
     this.router.navigate(['/consultar-clientes']);

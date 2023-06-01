@@ -33,7 +33,6 @@ export class ConsultaClientesComponent implements OnInit {
       },
       (error) => {
         console.error('Erro ao carregar clientes:', error);
-        // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
       }
     );
   }
@@ -50,12 +49,8 @@ export class ConsultaClientesComponent implements OnInit {
   selecionar(cliente: any) {
     this.clienteSelecionado = cliente;
   }
-  novoCliente() {
-    // Implementação do método para criar um novo cliente
-  }
 
   confirmarExclusao() {
-    // Implementação do método para confirmar a exclusão do cliente selecionado
     this.exibirConfirmacaoExclusao = false;
   }
 
@@ -75,7 +70,6 @@ export class ConsultaClientesComponent implements OnInit {
         },
         (error) => {
           console.error(`Erro ao excluir o cliente "${cliente.nome}":`, error);
-          // Implemente a lógica para lidar com erros, como exibir uma mensagem de erro
         }
       );
     }

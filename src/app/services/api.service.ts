@@ -34,18 +34,4 @@ export class ApiService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete<void>(url);
   }
-
-  deleteAll(): Observable<any> {
-    return this.http.delete(this.apiUrl);
-  }
-  filtrarClientes(filtroNome: string, filtroAtivo: boolean): Observable<Cliente[]> {
-    const params: any = {};
-    if (filtroNome) {
-      params.nome = filtroNome;
-    }
-    if (filtroAtivo !== null) {
-      params.ativo = filtroAtivo;
-    }
-    return this.http.get<Cliente[]>(this.apiUrl, { params });
-  }
 }

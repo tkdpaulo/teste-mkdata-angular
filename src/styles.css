@@ -1,10 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 :root {
-  --primary-color: #007bff; /* azul */
-  --secondary-color: #6c757d; /* cinza */
-  --light-color: #f8f9fa; /* cinza claro */
-  --dark-color: #343a40; /* cinza escuro */
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
 }
 
 .btn-primary {
@@ -13,8 +12,8 @@
 }
 
 .btn-primary:hover {
-  background-color: #0069d9; /* azul escuro */
-  border-color: #0062cc; /* azul escuro */
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
 
 .btn-secondary {
@@ -23,8 +22,8 @@
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268; /* cinza escuro */
-  border-color: #545b62; /* cinza escuro */
+  background-color: #5a6268;
+  border-color: #545b62;
 }
 
 .submit-form {
@@ -37,7 +36,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  /*background-color: var(--primary-color);*/
   color: black;
 }
 

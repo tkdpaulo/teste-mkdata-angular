@@ -8,10 +8,7 @@ import { ConsultaClientesComponent } from './pages/consulta-clientes/consulta-cl
 import { EditarClienteComponent } from './pages/editar-cliente/editar-cliente.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxMaskModule} from 'ngx-mask';
-
 import { HttpClientModule } from '@angular/common/http';
-
-
 
 @NgModule({
   declarations: [

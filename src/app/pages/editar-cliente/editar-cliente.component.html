@@ -1,8 +1,6 @@
 <div class="astro-clientes">
   <h1>Editar Cliente</h1>
-
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- Campos do cliente -->
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" formControlName="nome" minlength="5" maxlength="50" required>
@@ -26,8 +24,6 @@
       <label for="ativo">Ativo:</label>
       <input type="checkbox" id="ativo" formControlName="ativo" required>
     </div>
-
-    <!-- Telefones -->
     <div class="form-group" formArrayName="telefones">
       <div *ngFor="let telefone of telefones.controls; let i = index" [formGroupName]="i">
         <div class="telefone">
